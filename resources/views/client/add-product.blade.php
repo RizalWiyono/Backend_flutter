@@ -10,40 +10,40 @@
 
 
         <div class="py-12">
-            <x-succes-status class="mb-4" :status="session('message')" />
+            <x-succes-status class="mb-4 alert alert-secondary" :status="session('message')" />
           <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
               <div class="py-12 px-12 bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
-                  <form action="{{url('client/add-product')}}" method="POST">
+                  <form action="{{ route('client.store-product') }}" class="px-4" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div>
-                        <x-label for="name" :value="__('Nama Product')" />
-                        <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Gambar Produk:</label>
+                        <input class="form-control" name='image' type="file" id="image">
                     </div>
-                    <div>
-                        <x-label for="category" :value="__('Category Product')" />
-                        <x-input id="category" class="block mt-1 w-full" type="text" name="category" :value="old('category')" required autofocus />
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nama Produk:</label>
+                        <input class="form-control" name='name' type="text" id="name">
                     </div>
-                    <div>
-                        <x-label for="price" :value="__('Price Product')" />
-                        <x-input id="price" class="block mt-1 w-full" type="text" name="price" :value="old('price')" required autofocus />
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nama Kategori:</label>
+                        <input class="form-control" name="category" type="text" id="category">
                     </div>
-                    <div>
-                        <x-label for="description" :value="__('Description Product')" />
-                        <x-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required autofocus />
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Harga Produk:</label>
+                        <input class="form-control" name="price" type="number" id="price">
                     </div>
-                    <div>
-                        <x-label for="qty" :value="__('Quantity Product')" />
-                        <x-input id="qty" class="block mt-1 w-full" type="text" name="qty" :value="old('qty')" required autofocus />
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Deskripsi:</label>
+                        <textarea class="form-control" name="description" id="description" rows="5"></textarea>
                     </div>
-                    <div>
-                        <x-label for="image" :value="__('image Product')" />
-                        <x-input id="image" class="block mt-1 w-full" type="text" name="image" :value="old('image')" required autofocus />
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Stok Produk:</label>
+                        <input class="form-control" name="qty" type="number" id="qty">
                     </div>
-                    <x-button class="ml-3">
+                    <x-button class="mt-3 btn btn-primary">
                         {{ __('Add Product') }}
                     </x-button>
-                
+                </form>
           </div>
       </div>
   </x-client-layout>

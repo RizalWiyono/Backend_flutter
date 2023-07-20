@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,17 +45,24 @@ Route::get('/client/product', function () {
     return view('client.product');
 })->middleware(['auth:client'])->name('client.product');
 
+Route::get('/client/profile', function () {
+    return view('client.profile');
+})->middleware(['auth:client'])->name('client.profile');
+
 // Route::get('/client/add-product', function () {
 //     return view('client.add-product');
 // })->middleware(['auth:client'])->name('client.add-product');
 
-Route::controller(ProductController::class,)->group(function(){
-    Route::get('client/add-product','create') ->name('client.add-product');
-    Route::post('client/add-product','store') ->name('client.add-product');
+// Route::controller(ProductController::class,)->group(function(){
+//     Route::get('client/add-product','create') ->name('client.add-product');
+//     Route::post('client/add-product','store') ->name('client.add-product');
 
-    // Route::get('client.add-product','store') ->name('client.add-product');
+//     // Route::get('client.add-product','store') ->name('client.add-product');
 
-});
+// });
+
+Route::get('client/add-product', [ProductController::class, 'create'])->name('client.add-product');
+Route::post('client/store-product', [ProductController::class, 'store'])->name('client.store-product');
 
 
 require __DIR__.'/clientauth.php';

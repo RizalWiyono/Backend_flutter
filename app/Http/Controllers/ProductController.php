@@ -33,12 +33,28 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validate();
 
-        $product =Product::create($data);
-        return redirect('/client/add-product-')->with('message','Product Added Successfully');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public', $imageName);
+        }
+
+        $data = [
+            'name' => $request->input('name'),
+            'category' => $request->input('category'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'qty' => $request->input('qty'),
+            'image' => $imageName, // Simpan nama file gambar
+        ];
+
+        $product = Product::create($data);
+
+        return redirect('/client/add-product')->with('message','Product Added Successfully');
 
     }
 
